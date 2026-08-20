@@ -238,29 +238,468 @@ body {
     box-shadow: 0 10px 25px rgba(228, 64, 95, 0.3);
 }
 /* --- NAVIGATION --- */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0 30px 0;
-    border-bottom: 1px solid #faf2f2;
-    margin-bottom: 30px;
-    position: sticky;
+/* =========================================
+   SIMPLE PREMIUM NAVIGATION
+========================================= */
+
+.main-nav {
+    position: fixed;
     top: 0;
-    background: #ffffff;
-    z-index: 100;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    margin-top: -15px;
+
+    padding: 16px 25px;
+
+    background: transparent;
 }
-.logo { font-weight: bold; font-size: 20px; letter-spacing: 1px; color: #222; }
-.nav-links a {
+
+
+/* =========================================
+   SIMPLE PREMIUM NAVIGATION
+   WHITE + GREEN + YELLOW
+========================================= */
+
+.main-nav {
+  background-color: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    z-index: 1000;
+
+    padding: 14px 25px;
+
+    background: transparent;
+}
+
+
+/* =========================================
+   NAV CONTAINER
+========================================= */
+
+.nav-container {
+    max-width: 1180px;
+    height: 62px;
+
+    margin: 0 15px;
+    padding: 0 22px;
+
+    display: flex;
+    align-items: center;
+
+    background: black;
+
+    border: none;
+    border-radius: 50px;
+
+    box-shadow: none;
+    
+}
+
+
+/* =========================================
+   LOGO — AMJAD A
+========================================= */
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+
     text-decoration: none;
-    color: #180202;
-    font-size: 14px;
-    font-weight: 600;
-    margin-left: 20px;
-    transition: color 0.3s;
+
+    flex-shrink: 0;
 }
-.nav-links a:hover, .nav-links a.active-link { color: #0de970; }
-.hamburger { display: none; font-size: 24px; cursor: pointer; }
+
+.logo-name {
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: #20ad5c;
+
+    transition: color 0.3s ease;
+
+    margin-left: 40px;
+}
+
+.logo-dot {
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    color: #e4c400;
+
+    margin-left: 10px;
+
+    transition: color 0.3s ease;
+}
+
+.nav-logo:hover .logo-name {
+    color: #e4c400;
+}
+
+.nav-logo:hover .logo-dot {
+    color: #20ad5c;
+}
+
+
+/* =========================================
+   DESKTOP NAVIGATION
+========================================= */
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+
+/* =========================================
+   NAV LINKS
+========================================= */
+
+.nav-link {
+    position: relative;
+
+    padding: 7px 2px;
+
+    color: #555555;
+
+    font-family: "Lato", sans-serif;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: all 0.25s ease;
+}
+
+
+/* Yellow underline */
+
+.nav-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: #e4c400;
+
+    border-radius: 10px;
+
+    transform: translateX(-50%);
+
+    transition: width 0.25s ease;
+}
+
+
+/* Hover */
+
+.nav-link:hover {
+    color: #20ad5c;
+
+    transform: translateY(-1px);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+
+/* Active */
+
+.nav-link.active {
+    color: #20ad5c;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+
+/* =========================================
+   LET'S TALK BUTTON
+========================================= */
+
+.nav-talk {
+    height: 36px;
+
+    padding: 0 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    background: #20ad5c;
+
+    color: #ffffff;
+
+    border: 1px solid #20ad5c;
+
+    border-radius: 20px;
+
+    font-family: "Lato", sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition: all 0.3s ease;
+}
+
+.nav-talk span {
+    color: #ffe000;
+
+    font-size: 14px;
+
+    transition: transform 0.3s ease;
+}
+
+.nav-talk:hover {
+    background: #e4c400;
+
+    border-color: #e4c400;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 16px rgba(228, 196, 0, 0.20);
+}
+
+.nav-talk:hover span {
+    color: #ffffff;
+
+    transform: translate(2px, -2px);
+}
+
+
+/* =========================================
+   MOBILE MENU BUTTON
+========================================= */
+
+.menu-toggle {
+    display: none;
+
+    width: 39px;
+    height: 39px;
+
+    padding: 8px;
+
+    background: transparent;
+
+    border: 1px solid #20ad5c;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+
+    width: 100%;
+    height: 2px;
+
+    margin: 5px 0;
+
+    background: #20ad5c;
+
+    border-radius: 10px;
+
+    transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+    border-color: #e4c400;
+}
+
+.menu-toggle:hover span {
+    background: #e4c400;
+}
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+.mobile-menu {
+    display: none;
+
+    max-width: 1180px;
+
+    margin: 5px auto 0;
+
+    padding: 10px;
+
+    background: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.07);
+}
+
+.mobile-menu a {
+    display: block;
+
+    padding: 11px 13px;
+
+    color: #444444;
+
+    font-family: "Lato", sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    transition: all 0.25s ease;
+}
+
+.mobile-menu a:hover {
+    background: #f5f9e8;
+
+    color: #20ad5c;
+}
+
+
+/* Mobile Let's Talk */
+
+.mobile-menu a:last-child {
+    margin-top: 5px;
+
+    text-align: center;
+
+    background: #20ad5c;
+
+    color: #ffffff;
+}
+
+.mobile-menu a:last-child:hover {
+    background: #e4c400;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+
+    .nav-container {
+        padding: 0 18px;
+    }
+
+    .nav-menu {
+        gap: 12px;
+
+        margin-right: 15px;
+    }
+
+    .nav-link {
+        font-size: 11px;
+    }
+
+    .nav-talk {
+        padding: 0 13px;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 850px) {
+
+    .main-nav {
+        padding: 10px 15px;
+    }
+
+    .nav-container {
+        height: 58px;
+
+        padding: 0 15px;
+    }
+
+    .nav-menu,
+    .nav-talk {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+
+        margin-left: auto;
+    }
+
+    .mobile-menu.active {
+        display: block;
+    }
+
+    .logo-name {
+        font-size: 22px;
+    }
+
+    .logo-dot {
+        font-size: 23px;
+    }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 400px) {
+
+    .main-nav {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .nav-container {
+        padding: 0 13px;
+    }
+
+    .logo-name {
+        font-size: 20px;
+    }
+
+    .logo-dot {
+        font-size: 22px;
+    }
+}
 /* =========================================
    EDUCATION & EXPERTISE
 ========================================= */
@@ -772,4 +1211,322 @@ p { color: #191515; line-height: 1.7; font-size: 16px; margin-bottom: 15px; }
     .oval-frame, .oval-frame.small-frame { width: 200px; height: 220px; }
     .bg-light, .bg-dark { padding: 30px 20px; }
     .stat-number { font-size: 36px; }
+}
+/* =========================================
+   SMOOTH WEBSITE BACKGROUND ANIMATION
+========================================= */
+
+.animated-background {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    transition: transform 0.3s ease-out;
+}
+
+
+/* =========================================
+   FLOATING ORBS
+========================================= */
+
+.bg-orb {
+    position: absolute;
+
+    display: block;
+
+    border-radius: 50%;
+
+    filter: blur(70px);
+
+    opacity: 0.18;
+
+    animation:
+        floatingOrb 12s ease-in-out infinite;
+}
+
+
+/* Green */
+
+.orb-one {
+    width: 280px;
+    height: 280px;
+
+    background: #20ad5c;
+
+    top: 8%;
+    left: -80px;
+
+    animation-delay: 0s;
+}
+
+
+/* Yellow */
+
+.orb-two {
+    width: 230px;
+    height: 230px;
+
+    background: #e4c400;
+
+    top: 42%;
+    right: -70px;
+
+    animation-delay: -4s;
+}
+
+
+/* Light green */
+
+.orb-three {
+    width: 200px;
+    height: 200px;
+
+    background: #8bdc6b;
+
+    bottom: 5%;
+    left: 35%;
+
+    animation-delay: -8s;
+}
+
+
+/* =========================================
+   SOFT GLOW
+========================================= */
+
+.bg-glow {
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    border-radius: 50%;
+
+    filter: blur(55px);
+
+    opacity: 0.12;
+
+    animation: softGlow 9s ease-in-out infinite;
+}
+
+
+.glow-one {
+    background: #20ad5c;
+
+    top: 25%;
+    left: 45%;
+}
+
+
+.glow-two {
+    background: #e4c400;
+
+    bottom: 20%;
+    right: 25%;
+
+    animation-delay: -4s;
+}
+
+
+/* =========================================
+   ORB ANIMATION
+========================================= */
+
+@keyframes floatingOrb {
+
+    0% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+    25% {
+        transform:
+            translate3d(40px, -25px, 0)
+            scale(1.05);
+    }
+
+    50% {
+        transform:
+            translate3d(-20px, 35px, 0)
+            scale(0.95);
+    }
+
+    75% {
+        transform:
+            translate3d(25px, 15px, 0)
+            scale(1.03);
+    }
+
+    100% {
+        transform:
+            translate3d(0, 0, 0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================
+   GLOW ANIMATION
+========================================= */
+
+@keyframes softGlow {
+
+    0% {
+        transform: scale(0.9);
+        opacity: 0.08;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.18;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 0.08;
+    }
+
+}
+
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+.scroll-reveal {
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+.scroll-reveal.revealed {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   SCROLL TO TOP
+========================================= */
+
+.scroll-top {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #20ad5c;
+
+    color: #ffffff;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition: all 0.3s ease;
+
+    z-index: 999;
+}
+
+
+.scroll-top.show {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+
+.scroll-top:hover {
+    background: #e4c400;
+
+    transform: translateY(-4px);
+}
+
+
+/* =========================================
+   MOBILE OPTIMIZATION
+========================================= */
+
+@media (max-width: 768px) {
+
+    .bg-orb {
+        filter: blur(55px);
+
+        opacity: 0.12;
+    }
+
+    .orb-one {
+        width: 180px;
+        height: 180px;
+    }
+
+    .orb-two {
+        width: 160px;
+        height: 160px;
+    }
+
+    .orb-three {
+        width: 140px;
+        height: 140px;
+    }
+
+    .scroll-top {
+        right: 15px;
+        bottom: 15px;
+
+        width: 38px;
+        height: 38px;
+    }
+
+}
+
+
+/* =========================================
+   REDUCE MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .bg-orb,
+    .bg-glow {
+        animation: none;
+    }
+
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+    }
+
 }
