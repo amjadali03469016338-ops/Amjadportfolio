@@ -542,50 +542,14 @@ p {
     border-radius: inherit;
 }
 
-/* PROJECT IMAGES
-   EXACT SAME SIZE AS HERO IMAGE
-*/
-.project-image .oval-frame,
-.project-image .small-frame {
-    width: 100px !important;
-    height: 250px !important;
-
-    min-width: 340px;
-    max-width: 340px;
-
-    flex: 0 0 340px;
-
-    margin: 0 auto 25px;
-
-    padding: 7px;
-
-    border-radius: 48% 48% 42% 42% / 44% 44% 56% 56% !important;
-
-    overflow: hidden;
+/* PROJECT THUMBNAIL FRAME — RESTORED */
+.small-frame {
+    width: 205px;
+    height: 230px;
+    margin: 0 auto 20px;
+    box-shadow: 0 18px 40px rgba(49,85,255,.14);
 }
 
-.project-image .oval-frame img,
-.project-image .small-frame img {
-    width: 100% !important;
-    height: 100% !important;
-
-    display: block;
-
-    object-fit: cover !important;
-    object-position: center;
-
-    border-radius: inherit !important;
-}
-
-/* Direct image with small-frame class */
-.project-image img.small-frame {
-    background: linear-gradient(
-        145deg,
-        var(--primary),
-        #90a2ff,
-        var(--primary)
-    );
-}
 
 @keyframes imageFloat {
     0%, 100% {
@@ -1003,6 +967,7 @@ p {
 
 .step-card h4 {
     margin-bottom: 8px;
+ 
 }
 
 .step-card p {
@@ -1012,6 +977,7 @@ p {
 
 .full-width {
     grid-column: span 2;
+  
 }
 
 /* =========================
@@ -1675,14 +1641,6 @@ p {
         flex-basis: 320px;
     }
 
-    .project-image .oval-frame,
-    .project-image .small-frame {
-        width: 320px !important;
-        height: 380px !important;
-        min-width: 320px;
-        max-width: 320px;
-        flex-basis: 320px;
-    }
 }
 
 /* =========================================================
@@ -1881,20 +1839,6 @@ p {
         max-width: 85vw;
     }
 
-    /*
-       PROJECT IMAGE
-       Hero ke same proportion
-    */
-    .project-image .oval-frame,
-    .project-image .small-frame {
-        width: 300px !important;
-        height: 350px !important;
-
-        min-width: 300px;
-        max-width: 85vw;
-
-        flex-basis: 300px;
-    }
 
     .bg-light {
         width: 100%;
@@ -2064,20 +2008,6 @@ p {
         max-width: 225px;
     }
 
-    /*
-       PROJECT IMAGE
-       Same ratio / same style
-    */
-    .project-image .oval-frame,
-    .project-image .small-frame {
-        width: 225px !important;
-        height: 265px !important;
-
-        min-width: 225px;
-        max-width: 225px;
-
-        flex-basis: 225px;
-    }
 
     .bg-light {
         padding: 45px 17px;
@@ -2254,19 +2184,6 @@ p {
         max-width: 195px;
     }
 
-    /*
-       PROJECT IMAGE
-    */
-    .project-image .oval-frame,
-    .project-image .small-frame {
-        width: 195px !important;
-        height: 225px !important;
-
-        min-width: 195px;
-        max-width: 195px;
-
-        flex-basis: 195px;
-    }
 
     .stats-grid {
         grid-template-columns: 1fr;
@@ -2483,3 +2400,306 @@ select {
 /* =========================================================
    END — AMJAD ALI PORTFOLIO CSS
 ========================================================= */
+/* =========================================
+   ABOUT IMAGE - BALANCED
+   ========================================= */
+
+#about .image-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#about .image-block .oval-frame {
+    width: 300px;
+    height: 350px;
+    flex: 0 0 300px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    #about .image-block .oval-frame {
+        width: 280px;
+        height: 330px;
+        flex-basis: 280px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    #about .image-block {
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    #about .image-block .oval-frame {
+        width: 250px;
+        height: 295px;
+        flex-basis: 250px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 540px) {
+    #about .image-block .oval-frame {
+        width: 220px;
+        height: 230px;
+        flex-basis: 220px;
+    }
+}
+/* ============================================
+   PROJECT IMAGE + FRAME — BALANCED
+   ============================================ */
+
+.project-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+.project-image .small-frame {
+    width: 190px;
+    height: 225px;
+    flex: 0 0 190px;
+    margin: 0 auto;
+}
+
+/* Image inside project frame */
+.project-image .small-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .project-image .small-frame {
+        width: 175px;
+        height: 210px;
+        flex-basis: 175px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 540px) {
+    .project-image .small-frame {
+        width: 165px;
+        height: 200px;
+        flex-basis: 165px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 400px) {
+    .project-image .small-frame {
+        width: 155px;
+        height: 190px;
+        flex-basis: 155px;
+    }
+}
+/* ============================================
+   📱 MOBILE — ALL CARD SECTIONS 2 COLUMNS
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    /* Services */
+    .services-grid,
+    .service-grid,
+    .services-container {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    /* Skills */
+    .skills-grid,
+    .skills-container {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    /* Education */
+    .education-grid,
+    .education-container {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    /* Projects */
+    .projects-grid,
+    .projects-container {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    /* General card grids */
+    .cards-grid,
+    .card-grid {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+/* ============================================
+   📱 SMALL MOBILE
+   ============================================ */
+
+@media (max-width: 480px) {
+
+    .services-grid,
+    .service-grid,
+    .services-container,
+    .skills-grid,
+    .skills-container,
+    .education-grid,
+    .education-container,
+    .projects-grid,
+    .projects-container,
+    .cards-grid,
+    .card-grid {
+
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+}
+/* ============================================
+   📱 MOBILE — SERVICES 2 COLUMNS
+   ============================================ */
+
+@media (max-width: 768px) {
+    #services .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 15px !important;
+    }
+
+    #services .service-card {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #services .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+}
+/* ============================================
+   📱 MOBILE — WHY CHOOSE ME: 2 COLUMNS
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    #why-me .benefits-list {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+
+    #why-me .benefits-list li {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+
+    /* ========================================
+       HOW I WORK — 2 COLUMNS
+       ======================================== */
+
+    #process .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 15px !important;
+    }
+
+    #process .step-card {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    /* 5th card full-width ko bhi 2-column flow mein lao */
+    #process .step-card.full-width {
+        grid-column: auto !important;
+       
+    }
+
+
+    /* ========================================
+       STATS — 2 COLUMNS
+       ======================================== */
+
+    #stats .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 15px !important;
+    }
+
+    #stats .stat-item {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+}
+
+
+/* ============================================
+   📱 SMALL MOBILE
+   ============================================ */
+
+@media (max-width: 480px) {
+
+    #why-me .benefits-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+
+    #process .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+
+    #stats .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+    }
+}
+/* ============================================
+   📱 HOW I WORK — 4 CARDS + 5TH CENTER
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    #process .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 15px !important;
+    }
+
+    #process .step-card {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+
+    /* 5th card — center */
+    #process .step-card:nth-child(5) {
+        grid-column: 1 / -1 !important;
+        width: 50% !important;
+        justify-self: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    #process .process-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px !important;
+    }
+
+    /* 5th card — center */
+    #process .step-card:nth-child(5) {
+        width: 55% !important;
+        justify-self: center !important;
+    }
+}
