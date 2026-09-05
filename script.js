@@ -1,30 +1,46 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('.section');
-    const navLinks = document.querySelectorAll('.nav-links a');
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const navLinks = document.querySelectorAll(".mobile-menu a, .nav-link");
 
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= (sectionTop - 150)) {
-                current = section.getAttribute('id');
-            }
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener("click", function () {
+            const isOpen = mobileMenu.classList.toggle("active");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
         });
-        navLinks.forEach(link => {
-            link.classList.remove('active-link');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active-link');
-            }
-        });
-    });
-
-    window.toggleMenu = function() {
-        document.getElementById('navLinks').classList.toggle('show');
     }
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('navLinks').classList.remove('show');
+    navLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+            if (mobileMenu) {
+                mobileMenu.classList.remove("active");
+            }
+            if (menuToggle) {
+                menuToggle.setAttribute("aria-expanded", "false");
+            }
         });
     });
+
+    const sections = document.querySelectorAll("section[id]");
+    const navItems = document.querySelectorAll(".nav-link");
+
+    const highlightActiveLink = function () {
+        let currentSection = "hero";
+
+        sections.forEach(function (section) {
+            const sectionTop = section.offsetTop - 120;
+            if (window.scrollY >= sectionTop) {
+                currentSection = section.getAttribute("id");
+            }
+        });
+
+        navItems.forEach(function (item) {
+            const href = item.getAttribute("href");
+            const active = href === `#${currentSection}`;
+            item.classList.toggle("active", active);
+        });
+    };
+
+    window.addEventListener("scroll", highlightActiveLink, { passive: true });
+    highlightActiveLink();
 });
