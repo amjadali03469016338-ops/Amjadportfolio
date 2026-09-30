@@ -1,699 +1,1031 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amjad Ali | Frontend Web Developer</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#040605">
+
+    <title>Amjad Ali — Graphic Designer &amp; Full Stack Web Developer</title>
+    <meta name="description"
+        content="Amjad Ali is a graphic designer and full stack web developer with 5+ years of experience, building responsive websites, e-commerce, brand identity and digital experiences.">
+    <meta name="author" content="Amjad Ali">
+
+    <!-- TODO(launch): set the canonical + og:image/og:url to the real deployed
+         domain. An incorrect canonical actively misdirects search engines, and
+         most scrapers need og:image as an absolute URL. -->
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Amjad Ali — Graphic Designer &amp; Full Stack Web Developer">
+    <meta property="og:description"
+        content="Design and engineering in one workflow. Responsive websites, e-commerce, branding and digital experiences.">
+    <meta property="og:image" content="assets/img/hero.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="assets/img/hero.webp" fetchpriority="high">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Sora:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <div class="portfolio-wrapper">
-        <!-- NAVIGATION RIGHT -->
-<!-- =========================================
-     SIMPLE PREMIUM NAVIGATION
-========================================= -->
+    <a class="skip-link" href="#main">Skip to content</a>
 
-<header class="main-nav">
-
-    <div class="nav-container">
-
-        <!-- LOGO -->
-        <a href="#hero" class="nav-logo">
-            <span class="logo-name">AMJAD</span>
-            <span class="logo-dot">A.</span>
-        </a>
-
-
-        <!-- DESKTOP MENU -->
-        <nav class="nav-menu">
-
-            <a href="#hero" class="nav-link active">
-                Home
-            </a>
-
-            <a href="#about" class="nav-link">
-                About
-            </a>
-
-            <a href="#services" class="nav-link">
-                Services
-            </a>
-
-            <a href="#education" class="nav-link">
-                Education
-            </a>
-
-            <a href="#skills" class="nav-link">
-                Skills
-            </a>
-
-            <a href="#projects" class="nav-link">
-                Projects
-            </a>
-
-            <a href="#why-me" class="nav-link">
-                Why Me
-            </a>
-
-            <a href="#process" class="nav-link">
-                Process
-            </a>
-
-        </nav>
-
-
-        <!-- CONTACT BUTTON -->
-        <a href="#contact" class="nav-talk">
-            Let's Talk
-            <span>↗</span>
-        </a>
-
-
-        <!-- MOBILE MENU BUTTON -->
-        <button
-            class="menu-toggle"
-            id="menuToggle"
-            type="button"
-            aria-label="Open Menu"
-        >
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
+    <!-- ============================ ATMOSPHERE ============================ -->
+    <div class="atmos" aria-hidden="true">
+        <canvas id="bg-canvas"></canvas>
+        <div class="atmos__dof"></div>
+        <div class="atmos__grain"></div>
+        <div class="atmos__vig"></div>
     </div>
 
-
-    <!-- MOBILE MENU -->
-    <div class="mobile-menu" id="mobileMenu">
-
-        <a href="#hero">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#why-me">Why Me</a>
-        <a href="#process">Process</a>
-        <a href="#contact">Let's Talk ↗</a>
-
+    <!-- ============================ CURSOR ============================ -->
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <div class="cursor__ring" id="cursorRing"><span class="cursor__label" id="cursorLabel">View</span></div>
+        <div class="cursor__dot" id="cursorDot"></div>
     </div>
 
-</header>
-       
+    <!-- ============================ NAVBAR ============================ -->
+    <header class="nav" id="nav">
+        <div class="nav__bar">
+            <a href="#hero" class="nav__logo" aria-label="Amjad Ali — home">
+                AMJAD<b>.</b>
+            </a>
 
-        <!-- SECTION 1: HERO -->
-        <section id="hero" class="section hero-section">
-            <div class="hero-content">
-                <div class="hero-left">
-                    <div class="oval-frame">
-                        <!-- REPLACE 'portrait.jpg' WITH YOUR PHOTO -->
-                        <img src="12.png" alt="Amjad Ali">
+            <nav class="nav__links" id="navLinks" aria-label="Primary">
+                <a href="#hero" class="nav__link is-active" data-cursor="link">Home</a>
+                <a href="#about" class="nav__link" data-cursor="link">About</a>
+                <a href="#skills" class="nav__link" data-cursor="link">Skills</a>
+                <a href="#services" class="nav__link" data-cursor="link">Services</a>
+                <a href="#projects" class="nav__link" data-cursor="link">Projects</a>
+                <a href="#contact" class="nav__link" data-cursor="link">Contact</a>
+            </nav>
+
+            <a href="#contact" class="btn btn--gold btn--sm nav__cta" data-magnetic data-cursor="link">
+                Let's Talk
+            </a>
+
+            <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"
+                aria-controls="drawer">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile drawer -->
+    <div class="nav__drawer" id="drawer" aria-hidden="true">
+        <a href="#hero" data-drawer-link><span>01</span>Home</a>
+        <a href="#about" data-drawer-link><span>02</span>About</a>
+        <a href="#skills" data-drawer-link><span>03</span>Skills</a>
+        <a href="#services" data-drawer-link><span>04</span>Services</a>
+        <a href="#projects" data-drawer-link><span>05</span>Projects</a>
+        <a href="#contact" data-drawer-link><span>06</span>Contact</a>
+    </div>
+
+    <main class="shell" id="main">
+
+        <!-- ============================ HERO ============================ -->
+        <section id="hero" class="hero" data-mouse-scene>
+            <div class="hero__grid">
+
+                <div class="hero__copy">
+                    <p class="hero__avail"><i></i>Available for new projects</p>
+
+                    <h1>
+                        <span class="line"><span>Amjad</span></span>
+                        <span class="line"><span><em>Ali</em></span></span>
+                    </h1>
+
+                    <p class="hero__role">
+                        Graphic Designer <i></i> Full Stack Web Developer
+                    </p>
+
+                    <p class="hero__bio">
+                        I design and build <strong>digital experiences that hold up</strong> — considered visual
+                        systems on the surface, clean, responsive engineering underneath.
+                    </p>
+
+                    <div class="hero__actions">
+                        <a href="#projects" class="btn btn--gold" data-magnetic data-cursor="link">
+                            View Selected Work
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true">
+                                <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                        <a href="#contact" class="btn btn--ghost" data-magnetic data-cursor="link">Let's Talk</a>
                     </div>
                 </div>
-                <div class="hero-right">
-                    <h1><span class="text-green">AMJAD</span><br><span class="text-black">ALI</span></h1>
-                    <h3 class="text-yellow">FRONTEND WEB DEVELOPER</h3>
-                    <p>I build modern, responsive, and interactive websites with clean code, smooth animations, and user-focused experiences.</p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">View My Work</a>
-                        <a href="#contact" class="btn btn-secondary">Let's Work Together</a>
+
+                <!-- Glass Atelier stage -->
+                <div class="hero__stage" aria-hidden="true">
+                    <div class="rig" id="rig">
+                        <div class="shaft"></div>
+                        <div class="floor"></div>
+
+                        <div class="ring ring--1"></div>
+                        <div class="ring ring--2"></div>
+
+                        <div class="prism">
+                            <span class="prism__face"></span>
+                            <span class="prism__face"></span>
+                            <span class="prism__face"></span>
+                            <span class="prism__face"></span>
+                            <span class="prism__face"></span>
+                            <span class="prism__face"></span>
+                            <span class="prism__cap prism__cap--top"></span>
+                            <span class="prism__cap prism__cap--bot"></span>
+                            <span class="prism__core">
+                                <img src="assets/img/hero.webp" alt="" width="1086" height="1448" fetchpriority="high"
+                                    decoding="async">
+                            </span>
+                        </div>
+
+                        <div class="orbit orbit--a">
+                            <div class="orbit__spin">
+                                <div class="orbit__panel">
+                                    <div class="op-head"><span>Design</span><b>01</b></div>
+                                    <div class="op-art op-art--grid"></div>
+                                    <div class="op-foot">Colour · Type · Layout</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit orbit--b">
+                            <div class="orbit__spin">
+                                <div class="orbit__panel">
+                                    <div class="op-head"><span>Code</span><b>02</b></div>
+                                    <div class="op-art op-art--code"><i></i><i></i><i></i><i></i><i></i></div>
+                                    <div class="op-foot">HTML · CSS · JS</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="orbit orbit--c">
+                            <div class="orbit__spin">
+                                <div class="orbit__panel">
+                                    <div class="op-head"><span>Brand</span><b>03</b></div>
+                                    <div class="op-art op-art--type"><b>Aa</b></div>
+                                    <div class="op-foot">Identity · Voice</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+            </div>
+
+            <div class="hero__scroll" aria-hidden="true">
+                <i></i>
+                Scroll
+            </div>
+        </section>
+
+        <!-- ============================ ABOUT ============================ -->
+        <section id="about" class="section">
+            <div class="section__inner">
+                <div class="section__head reveal">
+                    <p class="eyebrow eyebrow--center">01 / About</p>
+                    <h2>Two disciplines,<br><span class="accent-green">one standard.</span></h2>
+                    <p class="lead">
+                        Most projects fall between a designer and a developer. I sit in both — so the idea survives
+                        the handoff.
+                    </p>
+                    <div class="rule"></div>
+                </div>
+
+                <div class="about__grid">
+                    <div class="about__figure reveal reveal--left">
+                        <figure class="portrait" data-tilt data-depth="5">
+                            <img class="portrait__img" src="assets/img/about.webp" alt="Amjad Ali" width="1086"
+                                height="1448" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="chip">
+                            <b>5+</b>
+                            <small>Years<br>Experience</small>
+                        </div>
+                    </div>
+
+                    <div class="about__body reveal reveal--right">
+                        <p>
+                            I'm <strong>Amjad Ali</strong>, a graphic designer and full stack web developer focused on
+                            building modern, responsive and genuinely usable websites. I turn ideas into working
+                            digital experiences using clean, efficient and well-structured code.
+                        </p>
+                        <p>
+                            My practice spans the whole line — <strong>branding and visual identity</strong> at one end,
+                            <strong>interface design and front-end development</strong> at the other — with WordPress
+                            and WooCommerce handling the content and commerce layer in between.
+                        </p>
+                        <p>
+                            My goal is simple: websites that are visually impressive but also <strong>fast,
+                            responsive, accessible and easy to use</strong>. Beauty is the baseline, not the exception.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Verifiable figures only -->
+                <div class="stats reveal" data-stats>
+                    <div class="stat">
+                        <span class="stat__num" data-count="5" data-suffix="+">0</span>
+                        <span class="stat__label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num" data-count="3">0</span>
+                        <span class="stat__label">Live Projects</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num" data-count="16">0</span>
+                        <span class="stat__label">Technologies</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__num" data-count="8">0</span>
+                        <span class="stat__label">Services</span>
+                    </div>
+                </div>
+
+                <p class="wall__group reveal" style="margin-top:clamp(50px,6vw,78px)">Education &amp; Expertise</p>
+
+                <div class="creds">
+                    <article class="cred reveal" style="--tz:26px;--ty:0px">
+                        <span class="cred__no">01</span>
+                        <h4>Matric</h4>
+                        <p class="cred__sub">Secondary Education</p>
+                        <p>Completed Matric with a strong academic foundation.</p>
+                        <div class="cred__foot"><span>Marks</span><b>890 / 1100</b></div>
+                    </article>
+
+                    <article class="cred reveal" style="--tz:0px;--ty:-8px;--d:80ms">
+                        <span class="cred__no">02</span>
+                        <h4>FSc</h4>
+                        <p class="cred__sub">Intermediate Education</p>
+                        <p>Completed FSc with an early interest in technology and computing.</p>
+                        <div class="cred__foot"><span>Marks</span><b>850 / 1100</b></div>
+                    </article>
+
+                    <article class="cred reveal" style="--tz:-24px;--ty:-4px;--d:160ms">
+                        <span class="cred__no">03</span>
+                        <h4>DIT</h4>
+                        <p class="cred__sub">Diploma in Information Technology</p>
+                        <p>Studied Information Technology and built practical computer skills.</p>
+                        <div class="cred__foot"><span>Marks</span><b>790 / 1000</b></div>
+                    </article>
+
+                    <article class="cred reveal" style="--tz:22px;--ty:-10px">
+                        <span class="cred__no">04</span>
+                        <h4>Web Development</h4>
+                        <p class="cred__sub">Full Stack &amp; Frontend</p>
+                        <p>Building modern, responsive and interactive websites with clean code.</p>
+                        <div class="cred__foot"><span>Status</span><b class="tag">In Practice</b></div>
+                    </article>
+
+                    <article class="cred reveal" style="--tz:0px;--ty:-18px;--d:80ms">
+                        <span class="cred__no">05</span>
+                        <h4>Civil Engineering</h4>
+                        <p class="cred__sub">Higher Education Institute</p>
+                        <p>Pursuing Civil Engineering with a strong technical foundation.</p>
+                        <div class="cred__foot"><span>Status</span><b class="tag">In Progress</b></div>
+                    </article>
+
+                    <article class="cred reveal" style="--tz:-22px;--ty:-12px;--d:160ms">
+                        <span class="cred__no">06</span>
+                        <h4>Graphic Design</h4>
+                        <p class="cred__sub">Creative Design</p>
+                        <p>Professional visual content for digital platforms and online projects.</p>
+                        <div class="cred__foot"><span>Status</span><b class="tag">Completed</b></div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 2: ABOUT ME -->
-        <section id="about" class="section bg-light">
-            <div class="section-content split-layout">
-                <div class="text-block">
-                    <h2>ABOUT ME</h2>
-                    <p>I'm Amjad Ali, a passionate Web Developer focused on building modern, responsive, and interactive websites. I enjoy turning ideas into functional digital experiences using clean, efficient, and well-structured code.</p>
-                    <p>I work with modern frontend technologies and continuously improve my development skills by building real-world projects and exploring new web technologies.</p>
-                    <p><strong>My goal is to create websites that are not only visually impressive, but also fast, responsive, accessible, and easy to use.</strong></p>
+        <!-- ============================ SKILLS ============================ -->
+        <section id="skills" class="section">
+            <div class="section__inner">
+                <div class="section__head reveal">
+                    <p class="eyebrow eyebrow--center">02 / Technology</p>
+                    <h2>The stack<br><span class="accent-green">I build with.</span></h2>
+                    <p class="lead">
+                        Sixteen tools I actually reach for — from markup and databases to the design suite.
+                    </p>
+                    <div class="rule"></div>
                 </div>
-                <div class="image-block">
-                    <div class="oval-frame">
-                        <img src="Amjad.png" alt="About Amjad Ali">
-                    </div>
+
+                <div class="wall">
+                    <p class="wall__group reveal">Frontend</p>
+                    <article class="tile reveal" style="--tz:22px;--tx:3px" data-tilt data-depth="9">
+                        <span class="tile__mark">&lt;/&gt;</span>
+                        <div><p class="tile__name">HTML</p>
+                            <p class="tile__cat">Structure</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:-18px;--tx:-4px;--d:60ms" data-tilt data-depth="9">
+                        <span class="tile__mark">#</span>
+                        <div><p class="tile__name">CSS</p>
+                            <p class="tile__cat">Presentation</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:12px;--tx:2px;--d:120ms" data-tilt data-depth="9">
+                        <span class="tile__mark">JS</span>
+                        <div><p class="tile__name">JavaScript</p>
+                            <p class="tile__cat">Behaviour</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:-10px;--tx:-3px;--d:180ms" data-tilt data-depth="9">
+                        <span class="tile__mark">Bs</span>
+                        <div><p class="tile__name">Bootstrap</p>
+                            <p class="tile__cat">UI Framework</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:26px;--tx:4px;--d:240ms" data-tilt data-depth="9">
+                        <span class="tile__mark">Rct</span>
+                        <div><p class="tile__name">React</p>
+                            <p class="tile__cat">UI Library</p>
+                        </div>
+                    </article>
+
+                    <p class="wall__group reveal">Backend &amp; Data</p>
+                    <article class="tile reveal" style="--tz:14px;--tx:-3px" data-tilt data-depth="9">
+                        <span class="tile__mark">N</span>
+                        <div><p class="tile__name">Node.js</p>
+                            <p class="tile__cat">Runtime</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:-22px;--tx:4px;--d:60ms" data-tilt data-depth="9">
+                        <span class="tile__mark">P</span>
+                        <div><p class="tile__name">PHP</p>
+                            <p class="tile__cat">Server-side</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:8px;--tx:-2px;--d:120ms" data-tilt data-depth="9">
+                        <span class="tile__mark">SQL</span>
+                        <div><p class="tile__name">MySQL</p>
+                            <p class="tile__cat">Database</p>
+                        </div>
+                    </article>
+
+                    <p class="wall__group reveal">CMS &amp; E-commerce</p>
+                    <article class="tile reveal" style="--tz:-12px;--tx:3px" data-tilt data-depth="9">
+                        <span class="tile__mark">Wp</span>
+                        <div><p class="tile__name">WordPress</p>
+                            <p class="tile__cat">CMS</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:20px;--tx:-4px;--d:60ms" data-tilt data-depth="9">
+                        <span class="tile__mark">Wc</span>
+                        <div><p class="tile__name">WooCommerce</p>
+                            <p class="tile__cat">Commerce</p>
+                        </div>
+                    </article>
+
+                    <p class="wall__group reveal">Tools &amp; Version Control</p>
+                    <article class="tile reveal" style="--tz:18px;--tx:-2px" data-tilt data-depth="9">
+                        <span class="tile__mark">G</span>
+                        <div><p class="tile__name">Git</p>
+                            <p class="tile__cat">Versioning</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:-16px;--tx:3px;--d:60ms" data-tilt data-depth="9">
+                        <span class="tile__mark">Gh</span>
+                        <div><p class="tile__name">GitHub</p>
+                            <p class="tile__cat">Hosting</p>
+                        </div>
+                    </article>
+
+                    <p class="wall__group reveal">Design Suite</p>
+                    <article class="tile reveal" style="--tz:24px;--tx:3px" data-tilt data-depth="9">
+                        <span class="tile__mark">Ai</span>
+                        <div><p class="tile__name">Adobe Illustrator</p>
+                            <p class="tile__cat">Vector</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:-14px;--tx:-3px;--d:60ms" data-tilt data-depth="9">
+                        <span class="tile__mark">Ps</span>
+                        <div><p class="tile__name">Adobe Photoshop</p>
+                            <p class="tile__cat">Raster</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:10px;--tx:2px;--d:120ms" data-tilt data-depth="9">
+                        <span class="tile__mark">Ca</span>
+                        <div><p class="tile__name">Canva</p>
+                            <p class="tile__cat">Quick Design</p>
+                        </div>
+                    </article>
+                    <article class="tile reveal" style="--tz:-20px;--tx:-4px;--d:180ms" data-tilt data-depth="9">
+                        <span class="tile__mark">Pr</span>
+                        <div><p class="tile__name">Adobe Premiere Pro</p>
+                            <p class="tile__cat">Motion</p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: SERVICES -->
+        <!-- ============================ SERVICES ============================ -->
         <section id="services" class="section">
-            <div class="section-header">
-                <h2>MY SERVICES</h2>
-            </div>
-            <div class="grid-3">
-                <div class="service-card">
-                    <h3>Frontend Development</h3>
-                    <p>I build interactive and responsive websites using modern frontend technologies.</p>
+            <div class="section__inner">
+                <div class="section__head reveal">
+                    <p class="eyebrow eyebrow--center">03 / Services</p>
+                    <h2>What I can<br><span class="accent-green">build for you.</span></h2>
+                    <p class="lead">Eight services, one workflow — from the first brand idea to the deployed build.
+                    </p>
+                    <div class="rule"></div>
                 </div>
-                <div class="service-card">
-                    <h3>Responsive Web Dev</h3>
-                    <p>I create websites that work smoothly across desktops, tablets, and mobile devices.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Landing Page Dev</h3>
-                    <p>I develop modern and engaging landing pages for businesses, products, and personal brands.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Website Development</h3>
-                    <p>I transform ideas and concepts into fully functional websites with clean and maintainable code.</p>
-                </div>
-                <div class="service-card">
-                    <h3>UI Implementation</h3>
-                    <p>I convert layouts and design concepts into responsive and interactive web interfaces.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Website Optimization</h3>
-                    <p>I focus on clean structure, performance, responsiveness, and a better user experience.</p>
+
+                <div class="services">
+                    <article class="svc reveal" data-tilt>
+                        <span class="svc__no">01</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <path d="m12 2 9 5-9 5-9-5 9-5Z" />
+                                <path d="m3 12 9 5 9-5M3 17l9 5 9-5" />
+                            </svg>
+                        </div>
+                        <h3>Full Stack Web Development</h3>
+                        <p>Complete builds from database to interface — front end, back end and everything wired
+                            together properly.</p>
+                    </article>
+
+                    <article class="svc reveal" data-tilt style="--d:70ms">
+                        <span class="svc__no">02</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <path d="m8 6-6 6 6 6M16 6l6 6-6 6M14 4l-4 16" />
+                            </svg>
+                        </div>
+                        <h3>Frontend Development</h3>
+                        <p>Interactive, responsive front ends built with semantic markup and modern, maintainable
+                            code.</p>
+                    </article>
+
+                    <article class="svc reveal" data-tilt style="--d:140ms">
+                        <span class="svc__no">03</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 7h16l-1.2 12.2a2 2 0 0 1-2 1.8H7.2a2 2 0 0 1-2-1.8L4 7Z" />
+                                <path d="M9 10V6a3 3 0 0 1 6 0v4" />
+                            </svg>
+                        </div>
+                        <h3>E-commerce Development</h3>
+                        <p>WooCommerce stores designed to convert — product pages, cart flow and a checkout that
+                            feels effortless.</p>
+                    </article>
+
+                    <article class="svc reveal" data-tilt style="--d:210ms">
+                        <span class="svc__no">04</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="5" width="14" height="10" rx="1.6" />
+                                <path d="M6 19h6M9 15v4" />
+                                <rect x="17" y="9" width="5" height="10" rx="1.2" />
+                            </svg>
+                        </div>
+                        <h3>Responsive Website Design</h3>
+                        <p>Layouts engineered to hold their shape on every screen, from a 27" display down to a
+                            small phone.</p>
+                    </article>
+
+                    <article class="svc reveal" data-tilt>
+                        <span class="svc__no">05</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9" />
+                                <circle cx="12" cy="12" r="3.4" />
+                                <path d="M12 3v3.4M12 17.6V21M21 12h-3.4M6.4 12H3" />
+                            </svg>
+                        </div>
+                        <h3>UI/UX Design</h3>
+                        <p>Interfaces designed around how people actually move — clear hierarchy, honest feedback,
+                            no guesswork.</p>
+                    </article>
+
+                    <article class="svc reveal" data-tilt style="--d:70ms">
+                        <span class="svc__no">06</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-1.3-1.1-1.7-1.1-2.7 0-.8.7-1.3 1.7-1.3H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8Z" />
+                                <circle cx="7.8" cy="11.4" r="1.15" fill="currentColor" stroke="none" />
+                                <circle cx="11" cy="7.6" r="1.15" fill="currentColor" stroke="none" />
+                                <circle cx="15.6" cy="8.6" r="1.15" fill="currentColor" stroke="none" />
+                            </svg>
+                        </div>
+                        <h3>Graphic Design</h3>
+                        <p>Social graphics, campaign visuals and digital artwork with a consistent, deliberate
+                            visual voice.</p>
+                    </article>
+
+                    <article class="svc reveal" data-tilt style="--d:140ms">
+                        <span class="svc__no">07</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <path d="m12 2 8 4.5v11L12 22l-8-4.5v-11L12 2Z" />
+                                <path d="m12 7.6 3.6 2v4.8L12 16.4 8.4 14.4V9.6L12 7.6Z" />
+                            </svg>
+                        </div>
+                        <h3>Branding</h3>
+                        <p>Logo systems, colour and type that give a business a recognisable face across every
+                            touchpoint.</p>
+                    </article>
+
+                    <article class="svc reveal" data-tilt style="--d:210ms">
+                        <span class="svc__no">08</span>
+                        <div class="svc__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="18" cy="5" r="2.6" />
+                                <circle cx="6" cy="12" r="2.6" />
+                                <circle cx="18" cy="19" r="2.6" />
+                                <path d="m8.3 10.8 7.4-4.2M8.3 13.2l7.4 4.2" />
+                            </svg>
+                        </div>
+                        <h3>Social Media Design</h3>
+                        <p>Post sets, stories and ad creatives built as a system, so your feed looks designed
+                            rather than assembled.</p>
+                    </article>
                 </div>
             </div>
         </section>
 
-       <!-- EDUCATION & EXPERTISE -->
-<section id="education" class="education-section">
-
-    <div class="education-heading">
-        <h2>EDUCATION & EXPERTISE</h2>
-        <div class="heading-line"></div>
-        <p>My academic background and professional expertise.</p>
-    </div>
-
-    <div class="education-grid">
-
-        <!-- MATRIC -->
-        <div class="education-card">
-
-            <span class="card-number">01</span>
-
-            <div class="education-title">
-                <div class="education-icon">🎓</div>
-                <h3>Matric</h3>
+        <!-- ============================ PROCESS ============================ -->
+        <section id="process" class="section pinsec" data-pin>
+            <div class="section__inner">
+                <div class="section__head reveal">
+                    <p class="eyebrow eyebrow--center">04 / Process</p>
+                    <h2>How the work<br><span class="accent-green">gets made.</span></h2>
+                    <p class="lead">Five stages, no mystery. You always know what is happening and why.</p>
+                    <div class="rule"></div>
+                </div>
             </div>
 
-            <p class="education-subtitle">
-                Secondary School Education
-            </p>
+            <div class="pin__sticky">
+                <div class="pin__track" data-cursor="drag">
+                    <article class="step">
+                        <span class="step__no">01</span>
+                        <h3>Discover</h3>
+                        <p>I start by understanding the requirements, the goals and the people the site is for.</p>
+                        <p class="step__meta"><i></i>Brief &amp; Research</p>
+                    </article>
+                    <article class="step">
+                        <span class="step__no">02</span>
+                        <h3>Plan</h3>
+                        <p>I plan the structure, layout, functionality and user journey before a line of code.</p>
+                        <p class="step__meta"><i></i>Structure &amp; Design</p>
+                    </article>
+                    <article class="step">
+                        <span class="step__no">03</span>
+                        <h3>Develop</h3>
+                        <p>I build it with clean, structured and maintainable code — organised, commented, readable.</p>
+                        <p class="step__meta"><i></i>Build</p>
+                    </article>
+                    <article class="step">
+                        <span class="step__no">04</span>
+                        <h3>Test</h3>
+                        <p>I test responsiveness, functionality, performance and cross-browser behaviour.</p>
+                        <p class="step__meta"><i></i>QA &amp; Refine</p>
+                    </article>
+                    <article class="step">
+                        <span class="step__no">05</span>
+                        <h3>Launch</h3>
+                        <p>I optimise the final build and get it live, then hand it over ready to grow.</p>
+                        <p class="step__meta"><i></i>Deploy &amp; Handover</p>
+                    </article>
+                </div>
+                <div class="pin__hud" aria-hidden="true">
+                    <span class="pin__hud-label">Stage</span>
+                    <span class="pin__hud-bar"><i data-hud-bar></i></span>
+                    <span data-hud-num>01</span>
+                </div>
+            </div>
+        </section>
 
-            <p class="education-description">
-                Completed my Matric education with a strong
-                academic foundation.
-            </p>
-
-            <div class="education-bottom">
-                <span>Marks</span>
-                <strong>890 / 1100</strong>
+        <!-- ============================ PROJECTS ============================ -->
+        <section id="projects" class="section pinsec" data-pin>
+            <div class="section__inner">
+                <div class="section__head reveal">
+                    <p class="eyebrow eyebrow--center">05 / Selected Work</p>
+                    <h2>Case studies,<br><span class="accent-green">not screenshots.</span></h2>
+                    <p class="lead">Three live builds. Open any of them for the full breakdown.</p>
+                    <div class="rule"></div>
+                </div>
             </div>
 
-        </div>
+            <div class="pin__sticky">
+                <div class="pin__track cases">
+                    <article class="case" data-case data-cursor="view" data-title="Modern Business Website"
+                        data-cat="Business Website" data-year="2025"
+                        data-desc="A responsive business website built with HTML, CSS and JavaScript, featuring a modern layout, smooth animations and a mobile-friendly design that works cleanly across every screen size."
+                        data-tech="HTML, CSS, JavaScript, Responsive Design"
+                        data-img="assets/img/projects/business-dashboard.webp" data-imgw="1400" data-imgh="998"
+                        data-live="https://bussines-dashboard-topaz.vercel.app/"
+                        data-repo="https://github.com/amjadali03469016338-ops/Bussines-Dashboard">
+                        <div class="case__shot">
+                            <span class="case__tag">Business Website</span>
+                            <img src="assets/img/projects/business-dashboard.webp"
+                                alt="Modern Business Website project interface" width="1400" height="998"
+                                loading="lazy" decoding="async">
+                            <span class="case__no">01</span>
+                        </div>
+                        <div class="case__body">
+                            <h3>Modern Business Website</h3>
+                            <p>A responsive business website with a modern layout, smooth animations and
+                                mobile-friendly design.</p>
+                            <div class="chips">
+                                <span class="chip-s">HTML</span><span class="chip-s">CSS</span>
+                                <span class="chip-s">JavaScript</span>
+                            </div>
+                            <div class="case__foot">
+                                <span class="tlink" aria-hidden="true">Open case study
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
 
+                    <article class="case" data-case data-cursor="view" data-title="Interactive Dashboard"
+                        data-cat="Web Application" data-year="2025"
+                        data-desc="A dynamic web dashboard displaying real-time data, built with vanilla JavaScript and a clean, dark-themed UI. Focused on readable data presentation and smooth, meaningful interaction."
+                        data-tech="HTML, CSS, JavaScript, Data Visualisation"
+                        data-img="assets/img/projects/interactive-dashboard.webp" data-imgw="1400" data-imgh="934"
+                        data-live="https://interactive-dashboard-ecru.vercel.app/"
+                        data-repo="https://github.com/amjadali03469016338-ops/Interactive-Dashboard">
+                        <div class="case__shot">
+                            <span class="case__tag">Web Application</span>
+                            <img src="assets/img/projects/interactive-dashboard.webp"
+                                alt="Interactive Dashboard project interface" width="1400" height="934"
+                                loading="lazy" decoding="async">
+                            <span class="case__no">02</span>
+                        </div>
+                        <div class="case__body">
+                            <h3>Interactive Dashboard</h3>
+                            <p>A dynamic dashboard presenting real-time data with vanilla JavaScript and a clean,
+                                dark-themed interface.</p>
+                            <div class="chips">
+                                <span class="chip-s">HTML</span><span class="chip-s">CSS</span>
+                                <span class="chip-s">JavaScript</span>
+                            </div>
+                            <div class="case__foot">
+                                <span class="tlink" aria-hidden="true">Open case study
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
 
-        <!-- FSC -->
-        <div class="education-card">
+                    <article class="case" data-case data-cursor="view" data-title="Modern Mobile Store"
+                        data-cat="E-commerce" data-year="2025"
+                        data-desc="A modern responsive mobile e-commerce website designed for browsing smartphones, exploring products and creating a smooth online shopping experience, with an account and login flow."
+                        data-tech="HTML, CSS, JavaScript, E-commerce"
+                        data-img="assets/img/projects/mobile-store.webp" data-imgw="467" data-imgh="509"
+                        data-live="https://mobile-store-iota-ten.vercel.app/login.html" data-repo="">
+                        <div class="case__shot">
+                            <span class="case__tag">E-commerce</span>
+                            <img src="assets/img/projects/mobile-store.webp"
+                                alt="Modern Mobile Store e-commerce project" width="467" height="509"
+                                loading="lazy" decoding="async">
+                            <span class="case__no">03</span>
+                        </div>
+                        <div class="case__body">
+                            <h3>Modern Mobile Store</h3>
+                            <p>A responsive mobile e-commerce experience for browsing smartphones and shopping
+                                smoothly online.</p>
+                            <div class="chips">
+                                <span class="chip-s">HTML</span><span class="chip-s">CSS</span>
+                                <span class="chip-s">JavaScript</span>
+                            </div>
+                            <div class="case__foot">
+                                <span class="tlink" aria-hidden="true">Open case study
+                                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="pin__hud" aria-hidden="true">
+                    <span class="pin__hud-label">Project</span>
+                    <span class="pin__hud-bar"><i data-hud-bar></i></span>
+                    <span data-hud-num>01</span>
+                </div>
+            </div>
+        </section>
 
-            <span class="card-number">02</span>
+        <!-- ============================ WHY ============================ -->
+        <section id="why" class="section">
+            <div class="section__inner">
+                <div class="section__head reveal">
+                    <p class="eyebrow eyebrow--center">06 / Why Work With Me</p>
+                    <h2>The difference is<br><span class="accent-green">in the details.</span></h2>
+                    <p class="lead">Seven things I treat as non-negotiable on every project.</p>
+                    <div class="rule"></div>
+                </div>
 
-            <div class="education-title">
-                <div class="education-icon">📚</div>
-                <h3>FSc</h3>
+                <div class="why">
+                    <article class="why__card reveal">
+                        <span class="why__no">01</span>
+                        <h3>Creative Design</h3>
+                        <p>Work with an actual visual idea behind it — not a template with the colour changed.</p>
+                    </article>
+                    <article class="why__card reveal" style="--d:60ms">
+                        <span class="why__no">02</span>
+                        <h3>Clean Development</h3>
+                        <p>Readable, well-organised code that the next person can pick up without a rewrite.</p>
+                    </article>
+                    <article class="why__card reveal" style="--d:120ms">
+                        <span class="why__no">03</span>
+                        <h3>Responsive Websites</h3>
+                        <p>Tested across real breakpoints, not just scaled down from a desktop layout.</p>
+                    </article>
+                    <article class="why__card reveal" style="--d:180ms">
+                        <span class="why__no">04</span>
+                        <h3>Modern UI</h3>
+                        <p>Interfaces with clear hierarchy and restrained motion, so content always leads.</p>
+                    </article>
+                    <article class="why__card reveal" style="--d:240ms">
+                        <span class="why__no">05</span>
+                        <h3>Attention to Detail</h3>
+                        <p>Alignment, spacing and hover states reviewed properly — the parts clients notice last.</p>
+                    </article>
+                    <article class="why__card reveal" style="--d:300ms">
+                        <span class="why__no">06</span>
+                        <h3>Clear Communication</h3>
+                        <p>You get honest progress updates in plain language, without the technical fog.</p>
+                    </article>
+                    <article class="why__card reveal" style="--d:360ms">
+                        <span class="why__no">07</span>
+                        <h3>Client-Focused Solutions</h3>
+                        <p>The right build for your actual goal and budget, not the most expensive one available.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ CONTACT ============================ -->
+        <section id="contact" class="section contact" data-mouse-scene>
+            <div class="contact__planes" aria-hidden="true">
+                <div class="contact__plane"></div>
+                <div class="contact__plane"></div>
+                <div class="contact__glow"></div>
             </div>
 
-            <p class="education-subtitle">
-                Intermediate Education
-            </p>
+            <div class="section__inner contact__grid">
+                <div class="reveal reveal--left">
+                    <p class="eyebrow">07 / Contact</p>
+                    <h2>Let's Build Something <em>Exceptional.</em></h2>
+                    <p class="lead">
+                        Have a project idea, a website requirement, or a brand that needs a face? Tell me about it —
+                        I read every message.
+                    </p>
 
-            <p class="education-description">
-                Completed my FSc education with an interest
-                in technology and computing.
-            </p>
+                    <div class="contact__aside">
+                        <!-- REPLACE: your real contact email (this is the single source of truth) -->
+                        <a class="contact__row" href="mailto:hello@yourdomain.com" data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="4" width="20" height="16" rx="2" />
+                                <path d="m2.5 6 9.5 7 9.5-7" />
+                            </svg>
+                            <span>
+                                <small>Email</small>
+                                <b>hello@yourdomain.com</b>
+                            </span>
+                        </a>
 
-            <div class="education-bottom">
-                <span>Marks</span>
-                <strong>850 / 1100</strong>
-            </div>
+                        <a class="contact__row" href="https://www.behance.net/amjadali267" target="_blank"
+                            rel="noopener noreferrer" data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M7.5 15.5c1.4 1.2 3 1.8 4.7 1.4 1.3-.3 2.2-1.3 2-2.4-.2-1.2-1.3-1.6-2.6-1.9-1.4-.3-2.6-.7-2.4-1.9.1-.9 1-1.5 2.2-1.4 1.3 0 2.5.5 3.3 1.2" />
+                            </svg>
+                            <span>
+                                <small>Portfolio</small>
+                                <b>Behance — amjadali267</b>
+                            </span>
+                        </a>
 
-        </div>
+                        <a class="contact__row" href="https://www.fiverr.com/sellers/hussanwahab" target="_blank"
+                            rel="noopener noreferrer" data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" aria-hidden="true">
+                                <path d="M3 7h18M3 12h18M3 17h11" />
+                            </svg>
+                            <span>
+                                <small>Hire directly</small>
+                                <b>Fiverr &amp; Upwork</b>
+                            </span>
+                        </a>
+                    </div>
 
-
-        <!-- DIT -->
-        <div class="education-card">
-
-            <span class="card-number">03</span>
-
-            <div class="education-title">
-                <div class="education-icon">💻</div>
-                <h3>DIT</h3>
-            </div>
-
-            <p class="education-subtitle">
-                Diploma in Information Technology
-            </p>
-
-            <p class="education-description">
-                Studied Information Technology and developed
-                practical computer skills.
-            </p>
-
-            <div class="education-bottom">
-                <span>Marks</span>
-                <strong>790 / 1000</strong>
-            </div>
-
-        </div>
-
-
-        <!-- WEB DEVELOPMENT -->
-        <div class="education-card">
-
-            <span class="card-number">04</span>
-
-            <div class="education-title">
-                <div class="education-icon">&lt;/&gt;</div>
-                <h3>Web Development</h3>
-            </div>
-
-            <p class="education-subtitle">
-                Frontend Web Developer
-            </p>
-
-            <p class="education-description">
-                Building modern, responsive and interactive
-                websites with clean code.
-            </p>
-
-             <div class="education-bottom">
-                <span>Learning</span>
-                
-            </div>
-
-
-        </div>
-                <!-- CIVIL ENGENEERING -->
-        <div class="education-card">
-
-            <span class="card-number">05</span>
-
-            <div class="education-title">
-                <div class="education-icon">&lt;/&gt;</div>
-                <h3>Civil Engeneering</h3>
-            </div>
-
-            <p class="education-subtitle">
-                High Education Insituite
-            </p>
-
-            <p class="education-description">
-                Pursuing Civil Engineering 
-                with a strong technical foundation.
-            </p>
-
-             <div class="education-bottom">
-                <span>Learning</span>
-                
-            </div>
-
-
-        </div>
-
-
-
-                <!-- GRAPHIC DESIGN -->
-        <div class="education-card">
-
-            <span class="card-number">06</span>
-
-            <div class="education-title">
-                <div class="education-icon">&lt;/&gt;</div>
-                <h3>Graphic Design</h3>
-            </div>
-
-            <p class="education-subtitle">
-                Creative Design
-            </p>
-
-            <p class="education-description">
-                Creating professional visual content for
-                digital platforms and online projects.
-            </p>
-
-             <div class="education-bottom">
-                <span>Completed</span>
-                
-            </div>
-
-
-        </div>
-      
-
-</section>
-
-        <!-- SECTION 4: SKILLS -->
-        <section id="skills" class="section bg-light">
-            <div class="section-header">
-                <h2>MY TECH STACK</h2>
-            </div>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-tags">
-                        <span>HTML5</span>
-                        <span>CSS3</span>
-                        <span>JavaScript</span>
-                        <span>Responsive Design</span>
-                        <span>CSS Animations</span>
-                        <span>DOM Manipulation</span>
+                    <div class="socials">
+                        <a class="soc" href="https://github.com/amjadali03469016338-ops" target="_blank"
+                            rel="noopener noreferrer" aria-label="GitHub" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.7-1.3-2.2-.2-4.5-1.1-4.5-4.8 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.4 9.4 0 0 1 5.1 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.5.1 2.7.6.7 1 1.6 1 2.7 0 3.7-2.3 4.6-4.5 4.8.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5Z" />
+                            </svg>
+                        </a>
+                        <a class="soc" href="https://www.linkedin.com/in/amjad-ali-08862b42b/" target="_blank"
+                            rel="noopener noreferrer" aria-label="LinkedIn" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M5.2 3.5A1.8 1.8 0 1 1 5.2 7a1.8 1.8 0 0 1 0-3.5ZM3.7 8.3h3v9.9h-3V8.3Zm4.9 0h2.9v1.4h.1c.4-.8 1.4-1.7 2.9-1.7 3.1 0 3.7 2 3.7 4.7v5.5h-3v-4.9c0-1.2 0-2.8-1.7-2.8s-1.9 1.3-1.9 2.7v5h-3V8.3Z" />
+                            </svg>
+                        </a>
+                        <a class="soc" href="https://www.instagram.com/amjad.ali123k/?hl=en" target="_blank"
+                            rel="noopener noreferrer" aria-label="Instagram" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                aria-hidden="true">
+                                <rect x="3" y="3" width="18" height="18" rx="5" />
+                                <circle cx="12" cy="12" r="3.8" />
+                                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+                            </svg>
+                        </a>
+                        <a class="soc" href="https://www.behance.net/amjadali267" target="_blank"
+                            rel="noopener noreferrer" aria-label="Behance" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M8.2 5.2c2.7 0 4.3 1.1 4.3 3.2 0 1.2-.6 2.1-1.7 2.6 1.6.4 2.5 1.5 2.5 3.2 0 2.5-1.9 3.8-5.2 3.8H3V5.2h5.2Zm0 6.2c1.1 0 1.7-.5 1.7-1.5s-.6-1.4-1.7-1.4H5.9v2.9h2.3Zm.2 4.2c1.3 0 2-.6 2-1.7 0-1.1-.7-1.7-2-1.7H5.9v3.4h2.5ZM15.3 7.2h5.2v1.5h-5.2V7.2Zm2.6 2.1c2.8 0 4.8 2 4.8 5v.6h-7.1c.1 1.5.9 2.4 2.4 2.4 1 0 1.7-.4 2-1.2h2.5c-.5 2-2.1 3.2-4.5 3.2-3.2 0-5.1-2-5.1-5s2-5 5-5Zm2.2 3.8c-.2-1.2-.9-2-2.1-2-1.1 0-2 .7-2.2 2h4.3Z" />
+                            </svg>
+                        </a>
+                        <a class="soc" href="https://www.fiverr.com/sellers/hussanwahab" target="_blank"
+                            rel="noopener noreferrer" aria-label="Fiverr" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M18.5 7.5h-5V6.3c0-1 .6-1.5 1.7-1.5h2.1V2.5h-2.7c-2.7 0-4.1 1.5-4.1 4v1h-2v2.7h2v8.1H8.1V21h8.2v-2.7h-2.8v-8.1h5V7.5Z" />
+                                <circle cx="19.2" cy="4.1" r="1.2" />
+                            </svg>
+                        </a>
+                        <a class="soc" href="https://www.upwork.com/freelancers/~015df44d867087b8dd" target="_blank"
+                            rel="noopener noreferrer" aria-label="Upwork" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M18.6 7.3c-1.9 0-3.5 1.2-4.3 2.9-.9-.7-1.8-1.5-2.5-2.4V5.6H9.6v4.8c0 1.7-.8 3-2.1 3-1.2 0-2-1-2-2.5V5.6H3v5.3c0 3.1 1.7 5.2 4.5 5.2 1.4 0 2.6-.6 3.4-1.7.9.9 2 1.7 3.2 2.3v4.1h2.2v-3.5c.7.2 1.4.3 2.2.3 3.2 0 5.5-2.2 5.5-5.1s-2.2-5.2-5.4-5.2Z" />
+                            </svg>
+                        </a>
+                        <a class="soc" href="https://www.facebook.com/profile.php?id=61586562358419" target="_blank"
+                            rel="noopener noreferrer" aria-label="Facebook" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.6 1.6-1.6h1.7V3.8c-.3 0-1.4-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4Z" />
+                            </svg>
+                        </a>
+                        <!--
+                        Restore once you have a number (country code, no + or spaces):
+                        <a class="soc" href="https://wa.me/923001234567" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-magnetic data-cursor="link">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5a9.5 9.5 0 0 0-8.2 14.3L2.5 21.5l4.8-1.3A9.5 9.5 0 1 0 12 2.5Zm0 17.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.8.8.8-2.7-.2-.3A7.6 7.6 0 1 1 12 19.7Zm4.2-5.7c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7 1-.1.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.3.2-.3.6-1.1.1-.2.1-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.5c.1.2 1.8 2.8 4.4 3.9 1.7.7 2.1.7 2.9.6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+                        </a>
+                        -->
                     </div>
                 </div>
-                <div class="skill-category">
-                    <h3>Development Tools</h3>
-                    <div class="skill-tags">
-                        <span>Visual Studio Code</span>
-                        <span>Git</span>
-                        <span>GitHub</span>
-                        <span>Chrome DevTools</span>
+
+                <!-- REPLACE: paste your free Web3Forms access key into data-web3forms-key to enable live delivery -->
+                <form class="form reveal reveal--right" id="contactForm" novalidate data-web3forms-key=""
+                    data-email="hello@yourdomain.com">
+                    <div class="form__grid">
+                        <div class="field">
+                            <input type="text" id="name" name="name" placeholder=" " autocomplete="name" required>
+                            <label for="name">Your name</label>
+                            <span class="field__err" data-err-for="name"></span>
+                        </div>
+                        <div class="field">
+                            <input type="email" id="email" name="email" placeholder=" " autocomplete="email"
+                                required>
+                            <label for="email">Your email</label>
+                            <span class="field__err" data-err-for="email"></span>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-       <!-- SECTION 5: PROJECTS -->
-<section id="projects" class="section">
-    <div class="section-header">
-        <h2>FEATURED PROJECTS</h2>
-    </div>
+                    <div class="field">
+                        <input type="text" id="subject" name="subject" placeholder=" " required>
+                        <label for="subject">Project type</label>
+                        <span class="field__err" data-err-for="subject"></span>
+                    </div>
 
-    <div class="grid-2">
+                    <div class="field field--full" style="margin-top:16px">
+                        <textarea id="message" name="message" placeholder=" " rows="5" required></textarea>
+                        <label for="message">Tell me about your project</label>
+                        <span class="field__err" data-err-for="message"></span>
+                    </div>
 
-        <!-- PROJECT 1 -->
-        <div class="project-card">
-            <div class="project-image">
-                <div class="oval-frame small-frame">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=60"
-                         alt="Modern Business Website">
-                </div>
-            </div>
+                    <button type="submit" class="btn btn--gold btn--block" id="submitBtn" data-magnetic
+                        data-cursor="link" style="margin-top:22px">
+                        <span data-btn-label>Send message</span>
+                    </button>
 
-            <h3>Modern Business Website</h3>
+                    <p class="form__note">
+                        Typically replies within a day. Your details are never shared or sold.
+                    </p>
 
-            <p>
-                A responsive business website built with HTML, CSS, and JavaScript,
-                featuring a modern layout, smooth animations, and mobile-friendly design.
-            </p>
-
-            <p class="tech-used">
-                <strong>Technologies:</strong> HTML, CSS, JavaScript
-            </p>
-
-            <div class="project-links">
-                <a href="https://bussines-dashboard-topaz.vercel.app/" class="btn btn-small">Live Demo →</a>
-                <a href="https://github.com/amjadali03469016338-ops/Bussines-Dashboard.git" class="btn btn-small btn-outline">GitHub →</a>
-            </div>
-        </div>
-
-
-        <!-- PROJECT 2 -->
-        <div class="project-card">
-            <div class="project-image">
-                <div class="oval-frame small-frame">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&auto=format&fit=crop&q=60"
-                         alt="Interactive Dashboard">
-                </div>
-            </div>
-
-            <h3>Interactive Dashboard</h3>
-
-            <p>
-                A dynamic web dashboard displaying real-time data, built with
-                vanilla JavaScript and a clean, dark-themed UI.
-            </p>
-
-            <p class="tech-used">
-                <strong>Technologies:</strong> HTML, CSS, JavaScript
-            </p>
-
-            <div class="project-links">
-                <a href="https://interactive-dashboard-ecru.vercel.app/" class="btn btn-small">Live Demo →</a>
-                <a href="https://github.com/amjadali03469016338-ops/Interactive-Dashboard.git" class="btn btn-small btn-outline">GitHub →</a>
-            </div>
-        </div>
-
-
-        <!-- PROJECT 3 — MOBILE STORE -->
-        <div class="project-card">
-            <div class="project-image">
-                <div class="oval-frame small-frame">
-                    <img src="123.PNG"
-                         alt="Modern Mobile Store">
-                </div>
-            </div>
-
-            <h3>Modern Mobile Store</h3>
-
-            <p>
-                A modern responsive mobile e-commerce website designed for
-                browsing smartphones, exploring products, and creating a
-                smooth online shopping experience.
-            </p>
-
-            <p class="tech-used">
-                <strong>Technologies:</strong> HTML, CSS, JavaScript
-            </p>
-
-            <div class="project-links">
-                <a href="https://mobile-store-iota-ten.vercel.app/login.html" class="btn btn-small">Live Demo →</a>
-                <a href="#" class="btn btn-small btn-outline">GitHub →</a>
-            </div>
-        </div>
-
-    </div>
-</section>
-        <!-- SECTION 6: WHY ME -->
-        <section id="why-me" class="section bg-light">
-            <div class="section-header">
-                <h2>WHY CHOOSE ME?</h2>
-            </div>
-            <ul class="benefits-list">
-                <li>Clean and organized code</li>
-                <li>Responsive websites</li>
-                <li>Modern web interfaces</li>
-                <li>Smooth interactions</li>
-                <li>Mobile-first development</li>
-                <li>Performance-focused</li>
-                <li>Attention to detail</li>
-                <li>Continuous learning</li>
-            </ul>
-        </section>
-
-        <!-- SECTION 7: PROCESS -->
-        <section id="process" class="section">
-            <div class="section-header">
-                <h2>HOW I WORK</h2>
-            </div>
-            <div class="process-grid">
-                <div class="step-card">
-                    <div class="step-number">01</div>
-                    <h4>Discover</h4>
-                    <p>I understand the project requirements, goals, and target audience.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">02</div>
-                    <h4>Plan</h4>
-                    <p>I plan the website structure, layout, functionality, and user experience.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">03</div>
-                    <h4>Develop</h4>
-                    <p>I build the website using clean, structured, and maintainable code.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">04</div>
-                    <h4>Test</h4>
-                    <p>I test responsiveness, functionality, performance, and browser compatibility.</p>
-                </div>
-                <div class="step-card full-width">
-                    <div class="step-number">05</div>
-                    <h4>Launch</h4>
-                    <p>I optimize the final website and prepare it for deployment.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 8: STATS (UPDATED DESIGN) -->
-        <section id="stats" class="section stats-section">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-number">10+</span>
-                    <p>Projects Built</p>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">5+</span>
-                    <p>Technologies</p>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <p>Responsive Focus</p>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">∞</span>
-                    <p>Learning & Improving</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECTION 9: CONTACT -->
-        <section id="contact" class="section bg-dark">
-            <div class="section-header text-white">
-                <h2 class="text-white-title">LET'S BUILD SOMETHING GREAT TOGETHER</h2>
-                <p class="text-white-p">Have a project idea, website requirement, or development opportunity? I'd love to hear about it. Let's discuss your idea and turn it into a functional and engaging web experience.</p>
-            </div>
-            <div class="contact-wrapper">
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! I will get back to you soon.');">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="text" placeholder="Subject" required>
-                    <textarea rows="5" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="btn btn-secondary full-width">Send Message</button>
+                    <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
                 </form>
             </div>
         </section>
 
-        <!-- SECTION 10: NEW PREMIUM FOOTER -->
-        <footer class="main-footer">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <h2>AMJAD ALI</h2>
-                    <p>Frontend Web Developer building modern, responsive, and interactive websites.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="https://www.fiverr.com/sellers/hussanwahab/edit"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="fiverr-btn">
+    </main>
 
-    <svg class="fiverr-logo"
-         viewBox="0 0 24 24"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-        <path d="M18.5 7.5h-5V6.3c0-1 .6-1.5 1.7-1.5h2.1V2.5h-2.7c-2.7 0-4.1 1.5-4.1 4v1h-2v2.7h2v8.1H8.1V21h8.2v-2.7h-2.8v-8.1h5V7.5z"/>
-        <circle cx="19.2" cy="4.1" r="1.2"/>
-    </svg>
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="foot">
+        <div class="foot__in">
+            <p class="foot__brand">AMJAD<span>.</span></p>
 
-    <span>View My Fiverr</span>
+            <nav class="foot__links" aria-label="Footer">
+                <a href="#about" data-cursor="link">About</a>
+                <a href="#skills" data-cursor="link">Skills</a>
+                <a href="#services" data-cursor="link">Services</a>
+                <a href="#projects" data-cursor="link">Projects</a>
+                <a href="#contact" data-cursor="link">Contact</a>
+            </nav>
 
-</a>
-                    <a href="https://www.behance.net/amjadali267"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="behance-btn">
+            <p class="foot__meta">&copy; <span id="year">2026</span> Amjad Ali — designed &amp; built from scratch.</p>
+        </div>
+    </footer>
 
-    <svg class="behance-logo"
-         viewBox="0 0 24 24"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-        <path d="M8.2 5.2c2.7 0 4.3 1.1 4.3 3.2 0 1.2-.6 2.1-1.7 2.6 1.6.4 2.5 1.5 2.5 3.2 0 2.5-1.9 3.8-5.2 3.8H3V5.2h5.2zm-.3 6.2c1.1 0 1.7-.5 1.7-1.5s-.6-1.4-1.7-1.4H5.9v2.9h2zm.2 4.2c1.3 0 2-.6 2-1.7 0-1.1-.7-1.7-2-1.7H5.9v3.4h2.2zM15.3 7.2h5.2v1.5h-5.2V7.2zm2.6 2.1c2.8 0 4.8 2 4.8 5v.6h-7.1c.1 1.5.9 2.4 2.4 2.4 1 0 1.7-.4 2-1.2h2.5c-.5 2-2.1 3.2-4.5 3.2-3.2 0-5.1-2-5.1-5s2-5 5-5zm2.2 3.8c-.2-1.2-.9-2-2.1-2-1.1 0-2 .7-2.2 2h4.3z"/>
-    </svg>
+    <!-- ============================ CASE STUDY OVERLAY ============================ -->
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal__card" id="modalCard">
+            <button class="modal__nav modal__nav--prev" id="modalPrev" type="button" aria-label="Previous project">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m14 6-6 6 6 6" />
+                </svg>
+            </button>
+            <button class="modal__nav modal__nav--next" id="modalNext" type="button" aria-label="Next project">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m10 6 6 6-6 6" />
+                </svg>
+            </button>
 
-    <span>View My Behance</span>
+            <div class="modal__shot">
+                <img id="modalImg" src="assets/img/projects/business-dashboard.webp" alt="" width="1400" height="998"
+                    decoding="async">
+            </div>
 
-</a>
-<a href="https://www.upwork.com/freelancers/~015df44d867087b8dd"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="upwork-btn">
-
-    <svg class="upwork-logo"
-         viewBox="0 0 24 24"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-        <path d="M18.6 7.3c-1.9 0-3.5 1.2-4.3 2.9-.9-.7-1.8-1.5-2.5-2.4V5.6H9.6v4.8c0 1.7-.8 3-2.1 3-1.2 0-2-1-2-2.5V5.6H3v5.3c0 3.1 1.7 5.2 4.5 5.2 1.4 0 2.6-.6 3.4-1.7.9.9 2 1.7 3.2 2.3v4.1h2.2v-3.5c.7.2 1.4.3 2.2.3 3.2 0 5.5-2.2 5.5-5.1s-2.2-5.2-5.4-5.2zm0 8c-.7 0-1.4-.1-2-.4v-4.2c.5-1.1 1.1-1.8 2-1.8 1.5 0 2.8 1.3 2.8 3.2 0 1.9-1.2 3.2-2.8 3.2z"/>
-    </svg>
-
-    <span>View My Upwork</span>
-
-</a>
-                    <a href="https://www.facebook.com/profile.php?id=61586562358419"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="facebook-btn">
-
-    <svg class="facebook-logo"
-         viewBox="0 0 24 24"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-        <path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.6 1.6-1.6h1.7V3.8c-.3 0-1.4-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V10H7.3v3h2.8v8h3.4z"/>
-    </svg>
-
-    <span>View My Facebook</span>
-
-</a>
-                </div>
-                <div class="footer-social">
-                    <h4>Connect</h4>
-                    <div class="social-icons">
-                        <a href="https://github.com/amjadali03469016338-ops"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="github-btn">
-
-    <svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.7.4-1.1.7-1.3-2.2-.2-4.5-1.1-4.5-4.8 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.4 9.4 0 0 1 5.1 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.5.1 2.7.6.7 1 1.6 1 2.7 0 3.7-2.3 4.6-4.5 4.8.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5z"/>
-    </svg>
-
-    <span>View My GitHub</span>
-</a>
-                        <a href="https://www.linkedin.com/in/amjad-ali-367bab39a/"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="linkedin-btn">
-
-    <svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M5.2 3.5A1.8 1.8 0 1 1 5.2 7a1.8 1.8 0 0 1 0-3.5zM3.7 8.3h3v9.9h-3V8.3zm4.9 0h2.9v1.4h.1c.4-.8 1.4-1.7 2.9-1.7 3.1 0 3.7 2 3.7 4.7v5.5h-3v-4.9c0-1.2 0-2.8-1.7-2.8s-1.9 1.3-1.9 2.7v5h-3V8.3z"/>
-    </svg>
-
-    <span>View My LinkedIn</span>
-</a>
-                        <a href="https://www.instagram.com/amjad.ali123k/?hl=en"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="instagram-btn">
-
-    <svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M7.2 2.8h9.6A4.4 4.4 0 0 1 21.2 7.2v9.6a4.4 4.4 0 0 1-4.4 4.4H7.2a4.4 4.4 0 0 1-4.4-4.4V7.2a4.4 4.4 0 0 1 4.4-4.4zm0 1.8a2.6 2.6 0 0 0-2.6 2.6v9.6a2.6 2.6 0 0 0 2.6 2.6h9.6a2.6 2.6 0 0 0 2.6-2.6V7.2a2.6 2.6 0 0 0-2.6-2.6H7.2zm4.8 2.8A4.6 4.6 0 1 1 12 16.6a4.6 4.6 0 0 1 0-9.2zm0 1.8a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6zm4.8-2.1a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/>
-    </svg>
-
-    <span> View My Instagram</span>
-</a>
-<a href="https://web.whatsapp.com/"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="whatsapp-btn">
-
-    <svg class="social-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2.5a9.5 9.5 0 0 0-8.2 14.3L2.5 21.5l4.8-1.3A9.5 9.5 0 1 0 12 2.5zm0 17.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-2.8.8.8-2.7-.2-.3A7.6 7.6 0 1 1 12 19.7zm4.2-5.7c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.7 1-.1.2-.3.2-.5.1-1.4-.7-2.3-1.3-3.2-2.9-.2-.3.2-.3.6-1.1.1-.2.1-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.4 1 2.5c.1.2 1.8 2.8 4.4 3.9 1.7.7 2.1.7 2.9.6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/>
-    </svg>
-
-    <span>View My Whatsapp</span>
-
-</a>
+            <div class="modal__body">
+                <div class="modal__head">
+                    <div>
+                        <p class="eyebrow" id="modalCat">Case study</p>
+                        <h3 id="modalTitle">Project</h3>
                     </div>
+                    <button class="modal__x" id="modalClose" type="button" aria-label="Close case study">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+                            <path d="M6 6l12 12M18 6 6 18" />
+                        </svg>
+                    </button>
+                </div>
+
+                <p id="modalDesc"></p>
+                <div class="chips" id="modalTech"></div>
+
+                <div class="modal__actions">
+                    <!-- hrefs are rewritten from each card's data-live / data-repo on open;
+                         the values below keep the static markup free of dead "#" links. -->
+                    <a class="btn btn--gold" id="modalLive"
+                        href="https://bussines-dashboard-topaz.vercel.app/" target="_blank" rel="noopener noreferrer"
+                        data-magnetic data-cursor="link">
+                        Live project
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" aria-hidden="true">
+                            <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </a>
+                    <a class="btn btn--ghost" id="modalRepo" hidden
+                        href="https://github.com/amjadali03469016338-ops/Bussines-Dashboard" target="_blank"
+                        rel="noopener noreferrer" data-magnetic data-cursor="link">View source</a>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Amjad Ali. Built with <span style="color: #D4A017;">❤</span> and clean code.</p>
-            </div>
-        </footer>
-
+        </div>
     </div>
-   <script src="auth.js"></script>
-<script src="script.js"></script>
+
+    <script src="js/core.js" defer></script>
+    <script src="js/scene.js" defer></script>
+    <script src="js/interactions.js" defer></script>
+    <script src="js/scroll.js" defer></script>
+    <script src="js/ui.js" defer></script>
+
 </body>
+
 </html>

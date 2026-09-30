@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AA monogram">
+  <defs>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00E58A"/>
+      <stop offset="0.55" stop-color="#F5D547"/>
+      <stop offset="1" stop-color="#00E58A"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#161C19"/>
+      <stop offset="1" stop-color="#050706"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#face)"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="url(#edge)" stroke-opacity="0.55" stroke-width="1.5"/>
+  <text x="32" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="27" font-weight="700" letter-spacing="-1" fill="url(#edge)">AA</text>
+</svg>
